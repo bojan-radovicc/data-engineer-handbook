@@ -1,0 +1,28 @@
+# Databricks Apps entry point.
+# Databricks handles the port/address for the Streamlit framework.
+command: ["streamlit", "run", "app.py"]
+
+env:
+  # Non-secret connection config lives here in plain text.
+  - name: PGHOST
+    value: "ep-patient-flower-d19k0urn.database.us-west-2.cloud.databricks.com"
+  - name: PGPORT
+    value: "5432"
+  - name: PGDATABASE
+    value: "databricks_postgres"
+  - name: PGUSER
+    value: "de"
+  - name: PGSSLMODE
+    value: "require"
+  - name: PGSCHEMA
+    value: "support"
+  - name: PGAPPNAME
+    value: "lakebase-support-app"
+
+  # The password is the ONLY secret — do NOT inline it here (it would be
+  # committed and submitted). It is injected from the Databricks secret
+  # database/lakebase-password via an app Secret resource:
+  #   Edit -> Resources -> Add resource -> Secret -> scope "database",
+  #   key "lakebase-password", resource key "lakebase-password", permission READ.
+  - name: PGPASSWORD
+    valueFrom: "lakebase-password"
