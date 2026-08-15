@@ -2,14 +2,11 @@
 
 Run once after configuring your database environment variables:
 
-    python init_db.py
-
-Uses the same connection logic as the app (see db.py).
 """
 
 import pathlib
 
-import db
+import lakebase
 
 SQL_DIR = pathlib.Path(__file__).parent / "sql"
 
@@ -19,7 +16,7 @@ def run_file(path: pathlib.Path) -> None:
     # Split on statement boundaries. Our SQL contains no semicolons inside
     # string literals, so a simple split is sufficient here.
     statements = [s.strip() for s in text.split(";") if s.strip()]
-    conn = db.get_connection()
+    conn = lakebase.get_connection()
     with conn.cursor() as cur:
         for stmt in statements:
             cur.execute(stmt)

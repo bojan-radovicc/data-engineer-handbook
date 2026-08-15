@@ -1,4 +1,27 @@
 - **Databricks App URL:** `https://lakebase-app-bojan-2162472151945123.aws.databricksapps.com`
+- **Source repository:** `[paste your GitHub URL after running the commands below]`
+
+## Publish the source (fills the missing repo URL)
+
+Run from inside the `app/` directory. Requires an authenticated `gh`
+(`gh auth login`). `.env` is gitignored, so no secrets are pushed.
+
+```bash
+cd databricks-ai-bootcamp/app
+git init
+git add .
+git commit -m "Lakebase-powered support app (Day 1 homework)"
+gh repo create lakebase-support-app --public --source=. --remote=origin --push
+gh repo view --web   # opens the repo; copy the URL into 'Source repository' above
+```
+
+No `gh`? Create an empty repo on github.com, then:
+
+```bash
+git remote add origin https://github.com/<you>/lakebase-support-app.git
+git branch -M main
+git push -u origin main
+```
 
 ## Reflection (3–5 sentences — DRAFT, edit to your own experience)
 
